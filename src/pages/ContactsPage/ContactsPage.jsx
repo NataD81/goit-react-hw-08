@@ -5,11 +5,13 @@ import ContactList from "../../components/ContactList/ContactList";
 import s from "./ContactsPage.module.css";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { selectLoading, selectError } from "../../redux/contacts/selectors";
+import SearchBox from "../../components/SearchBox/SearchBox";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -17,6 +19,7 @@ const ContactsPage = () => {
     <div className={s.container}>
       <h1>Contacts</h1>
       <ContactForm />
+      <SearchBox />
       {isLoading && <p>Loading contacts...</p>}
       {error && <p className={s.error}>Error: {error}</p>}
       <ContactList />
